@@ -1,0 +1,12 @@
+.form-login {
+    max-width: 500px;
+    margin: auto;
+}
+
+.facebook-div {
+    margin-top: 30vh;
+    text-align: center;
+    padding: 20px;
+    border: royalblue 5px solid;
+    border-radius: 20px;
+}
