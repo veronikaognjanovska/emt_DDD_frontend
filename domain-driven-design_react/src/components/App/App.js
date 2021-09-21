@@ -181,11 +181,12 @@ class App extends Component {
     }
 
 
-    addToShoppingCartBook = (bookId) => {
+    addToShoppingCartBook = (book) => {
         window.location.pathname = "/books";
-        OrderService.addToShoppingCartBook(bookId)
+        OrderService.addToShoppingCartBook(book)
             .then(() => {
                 this.loadItems();
+                this.loadBooks();
                 NotificationService.success('Success!', 'Book added to Shopping Cart successfully!')
             })
             .catch(error => {
@@ -193,11 +194,12 @@ class App extends Component {
             });
     }
 
-    onRemoveItemFromSC = (bookId) => {
+    onRemoveItemFromSC = (orderItemId) => {
         window.location.pathname = "/books";
-        OrderService.onRemoveItemFromSC(bookId)
+        OrderService.onRemoveItemFromSC(orderItemId)
             .then(() => {
                 this.loadItems();
+                this.loadBooks();
                 NotificationService.warn('Success!', 'Book removed from Shopping Cart successfully!')
             })
             .catch(error => {

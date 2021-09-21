@@ -17,7 +17,7 @@ class BookView extends React.Component {
             <div className="row book-view">
                 <div className={"button-right"}>
                     <a title={"Delete"} className={"btn btn-outline-success ml-2"}
-                       onClick={() => this.props.onAddToShoppingCartBook(this.props.book?.id.id)}>
+                       onClick={() => this.props.onAddToShoppingCartBook(this.props.book)}>
                         Add To Shopping Cart
                     </a>
                 </div>

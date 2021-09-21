@@ -8,7 +8,7 @@ const ShoppingCartItemComponent = (props) => {
             <td>{props.term.orderItemPrice.amount + " " + props.term.orderItemPrice.currency}</td>
             <td className={"text-right actions"}>
                 <a title={"Delete"} className={"btn btn-outline-danger ml-2"}
-                   onClick={() => props.onRemoveItem(props.term.bookId.id)}>
+                   onClick={() => props.onRemoveItem(props.term.id.id)}>
                     Remove Item
                 </a>
             </td>

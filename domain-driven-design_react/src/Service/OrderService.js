@@ -21,12 +21,17 @@ const OrderService = {
         return axios.get(`${OrderURL}/${UserService.getLoggedInUser()}/makeorder`);
     },
 
-    addToShoppingCartBook: (bookId) => {
-        return axios.get(`${OrderURL}/${UserService.getLoggedInUser()}/add/${bookId}`);
+    addToShoppingCartBook: (book) => {
+        return axios.put(`${OrderURL}/${UserService.getLoggedInUser()}/add`, {
+            'quantity': 1,
+            'book': book
+        });
     },
 
-    onRemoveItemFromSC: (bookId) => {
-        return axios.get(`${OrderURL}/${UserService.getLoggedInUser()}/remove/${bookId}`);
+    onRemoveItemFromSC: (orderItemId) => {
+        return axios.put(`${OrderURL}/${UserService.getLoggedInUser()}/remove`, {
+            'orderItemId': orderItemId
+        });
     },
 };
 
