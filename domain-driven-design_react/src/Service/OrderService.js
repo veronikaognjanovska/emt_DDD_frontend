@@ -24,9 +24,9 @@ const OrderService = {
         });
     },
 
-    addToShoppingCartBook: (book) => {
+    addToShoppingCartBook: (book, qty) => {
         return axios.put(`${OrderURL}/${UserService.getLoggedInUser()}/add`, {
-            'quantity': 1,
+            'quantity': qty,
             'book': book
         });
     },

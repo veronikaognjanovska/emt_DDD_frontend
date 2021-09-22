@@ -70,6 +70,16 @@ class OrderView extends React.Component {
                                    disabled
                             />
                         </div>
+                        <div className="form-group">
+                            <label>Currency</label>
+                            <input type="text"
+                                   className="form-control"
+                                   id="address"
+                                   name="address"
+                                   value={this.props.order?.address}
+                                   disabled
+                            />
+                        </div>
                     </form>
                 </div>
                 <div className={"col-sm-12 mt-5"}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import UserService from "../../../Service/UserService";
+import Modal from "../../Modals/Modal";
 
 class BookView extends React.Component {
 
@@ -9,7 +10,14 @@ class BookView extends React.Component {
         this.state = {
             page: 0,
             size: 5,
-            username: UserService.getLoggedInUser()
+            username: UserService.getLoggedInUser(),
+            data: {
+                label: 'Quantity',
+                title: 'Choose quantity',
+                type: 'number'
+            },
+            show: false,
+            showModal: false,
         }
     }
 
@@ -19,9 +27,10 @@ class BookView extends React.Component {
             <div className="row book-view">
                 {
                     this.state.username !== undefined &&
+                    this.props.book?.bookQuantity > 0 &&
                     <div className={"button-right"}>
                         <a title={"Delete"} className={"btn btn-outline-success ml-2"}
-                           onClick={() => this.props.onAddToShoppingCartBook(this.props.book)}>
+                           onClick={() => this.chooseQuantity()}>
                             Add To Shopping Cart
                         </a>
                     </div>
@@ -76,6 +85,14 @@ class BookView extends React.Component {
                         </div>
                     </form>
                 </div>
+                <div className={'row m-2'} style={{backgroundColor: 'blue'}}>
+                    <div className={'col-sm-3 d-flex justify-content-center'}>
+                        <Modal show={this.state.showModal} handleClose={this.hideModal}
+                               data={this.state.data} onSubmit={this.onAddToShoppingCartBook}>
+                        </Modal>
+                    </div>
+
+                </div>
             </div>
         )
     }
@@ -86,6 +103,22 @@ class BookView extends React.Component {
         this.setState({
             page: selected
         })
+    }
+
+    showModal = () => {
+        this.setState({show: true});
+    }
+
+    hideModal = () => {
+        this.setState({show: false, showModal: false});
+    }
+
+    chooseQuantity = () => {
+        this.setState({showModal: true});
+    }
+
+    onAddToShoppingCartBook = (qty) => {
+        this.props.onAddToShoppingCartBook(this.props.book, qty);
     }
 
 }

@@ -205,13 +205,13 @@ class App extends Component {
     }
 
 
-    addToShoppingCartBook = (book) => {
-        window.location.pathname = "/books";
-        OrderService.addToShoppingCartBook(book)
+    addToShoppingCartBook = (book, qty) => {
+        OrderService.addToShoppingCartBook(book, qty)
             .then(() => {
                 this.loadItems();
                 this.loadBooks();
                 NotificationService.success('Success!', 'Book added to Shopping Cart successfully!')
+                window.location.pathname = "/books";
             })
             .catch(error => {
                 NotificationService.danger('Error!', 'Book can not be added to Shopping Cart!')
@@ -219,7 +219,6 @@ class App extends Component {
     }
 
     onRemoveItemFromSC = (orderItemId) => {
-        window.location.pathname = "/books";
         OrderService.onRemoveItemFromSC(orderItemId)
             .then(() => {
                 this.loadItems();
