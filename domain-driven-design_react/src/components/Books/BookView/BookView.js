@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import UserService from "../../../Service/UserService";
 
 class BookView extends React.Component {
 
@@ -7,7 +8,8 @@ class BookView extends React.Component {
         super(props);
         this.state = {
             page: 0,
-            size: 5
+            size: 5,
+            username: UserService.getLoggedInUser()
         }
     }
 
@@ -15,12 +17,15 @@ class BookView extends React.Component {
     render() {
         return (
             <div className="row book-view">
-                <div className={"button-right"}>
-                    <a title={"Delete"} className={"btn btn-outline-success ml-2"}
-                       onClick={() => this.props.onAddToShoppingCartBook(this.props.book)}>
-                        Add To Shopping Cart
-                    </a>
-                </div>
+                {
+                    this.state.username !== undefined &&
+                    <div className={"button-right"}>
+                        <a title={"Delete"} className={"btn btn-outline-success ml-2"}
+                           onClick={() => this.props.onAddToShoppingCartBook(this.props.book)}>
+                            Add To Shopping Cart
+                        </a>
+                    </div>
+                }
                 <div className={"button-left"}>
                     <Link className={"btn btn-outline-primary"} to={"/books"}>Back</Link>
                 </div>

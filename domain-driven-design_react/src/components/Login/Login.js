@@ -24,6 +24,7 @@ class Login extends Component {
                 NotificationService.success('Success!', 'User is logged in!');
                 // set user
                 UserService.setLoggedInUser(data.data);
+                this.props.onLogin(username);
                 // redirect to home
                 window.location.pathname = "/books";
             })

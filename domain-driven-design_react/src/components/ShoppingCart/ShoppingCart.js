@@ -12,6 +12,7 @@ class ShoppingCart extends React.Component {
             page: 0,
             size: 2
         }
+        console.log(props)
     }
 
     calculateTotal = () => {

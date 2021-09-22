@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate'
 import BookComponent from "./BookComponent/BookComponent";
 import './Books.css';
 import {Link} from "react-router-dom";
+import UserService from "../../Service/UserService";
 
 class BooksList extends React.Component {
 
@@ -10,7 +11,8 @@ class BooksList extends React.Component {
         super(props);
         this.state = {
             page: 0,
-            size: 2
+            size: 2,
+            username: UserService.getLoggedInUser()
         }
     }
 
@@ -22,9 +24,12 @@ class BooksList extends React.Component {
 
         return (
             <div className={"row books"}>
-                <div className={"button-right"}>
-                    <Link className={"btn btn-outline-success add-btn"} to={"/books/add"}>Add New Book</Link>
-                </div>
+                {
+                    this.state.username !== undefined &&
+                    <div className={"button-right"}>
+                        <Link className={"btn btn-outline-success add-btn"} to={"/books/add"}>Add New Book</Link>
+                    </div>
+                }
                 <div className={"col-sm-12 m-4"}>
                     <h1>List of Books</h1>
                 </div>

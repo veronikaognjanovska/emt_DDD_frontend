@@ -17,7 +17,7 @@ const BookService = {
         return axios.post(`${BookURL}/add`, {
             "bookTitle": bookTitle,
             "bookAuthor": bookAuthor,
-            "bookQuantity": bookQuantity,
+            "quantity": bookQuantity,
             "amount": amount,
             "currency": currency
         });
@@ -27,7 +27,7 @@ const BookService = {
         return axios.put(`${BookURL}/edit/${id}`, {
             "bookTitle": bookTitle,
             "bookAuthor": bookAuthor,
-            "bookQuantity": bookQuantity,
+            "quantity": bookQuantity,
             "amount": amount,
             "currency": currency
         });

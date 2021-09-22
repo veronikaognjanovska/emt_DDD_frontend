@@ -18,12 +18,14 @@ import Register from "../Login/Register";
 import Logout from "../Login/Logout1";
 import UserProfile from "../Users/User";
 import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import UserService from "../../Service/UserService";
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            username: undefined,
             books: [],
             orders: [],
             selectedBook: {},
@@ -39,11 +41,11 @@ class App extends Component {
                 <main>
                     <div className={"container pt-4"}>
                         <Route path={"/login"} exact render={() =>
-                            <Login/>}/>
+                            <Login onLogin={this.onLogin}/>}/>
                         <Route path={"/register"} exact render={() =>
                             <Register/>}/>
                         <Route path={"/logout"} exact render={() =>
-                            <Logout/>}/>
+                            <Logout onLogout={this.onLogout}/>}/>
                         <Route path={"/users/:username"} exact render={() =>
                             <UserProfile/>}/>
                         <Route path={"/orders/view/:id"} exact render={() =>
@@ -89,9 +91,19 @@ class App extends Component {
     }
 
     componentDidMount() {
+        this.loadData();
+    }
+
+    loadData = () => {
         this.loadBooks();
-        this.loadOrders();
-        this.loadItems();
+        let username = UserService.getLoggedInUser();
+        if (username) {
+            this.loadOrders();
+            this.loadItems();
+            this.setState({
+                username: username
+            });
+        }
     }
 
     loadBooks = () => {
@@ -127,6 +139,18 @@ class App extends Component {
 
     onViewGetOrder = (id) => {
         this.getOrder(id);
+    }
+
+    onLogin = (username) => {
+        this.setState({
+            username: username
+        });
+    }
+
+    onLogout = () => {
+        this.setState({
+            username: undefined
+        });
     }
 
     getBook = (id) => {

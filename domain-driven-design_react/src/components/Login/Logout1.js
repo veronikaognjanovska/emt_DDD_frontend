@@ -12,6 +12,7 @@ class Logout extends Component {
             UserService.setLoggedInUser(null);
             message = 'User is logged out!';
             NotificationService.success('Success!', message);
+            this.props.onLogout();
         } catch (e) {
             message = 'User can not log out';
             NotificationService.danger('Error!', message);

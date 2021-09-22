@@ -26,8 +26,6 @@ const Header = (props) => {
                     </div>
                     <div className={"navbar-header navbar-right"}>
                         <Link className={"btn btn-outline-light"} to={"/books"}>Books</Link>
-                        <Link className={"btn btn-outline-light ml-2"} to={"/shoppingcart"}>Shopping Cart</Link>
-                        <Link className={"btn btn-outline-light ml-2"} to={"/orders"}>Orders</Link>
                         {
                             username === undefined &&
                             <div className="d-inline">
@@ -38,6 +36,8 @@ const Header = (props) => {
                         {
                             username !== undefined &&
                             <div className="d-inline">
+                                <Link className={"btn btn-outline-light ml-2"} to={"/shoppingcart"}>Shopping Cart</Link>
+                                <Link className={"btn btn-outline-light ml-2"} to={"/orders"}>Orders</Link>
                                 <Link to={userUrl} className={"btn btn-outline-light ml-2"}>User</Link>
                                 <Link to={"/logout"} className={"btn btn-outline-light ml-2"}>Log out</Link>
                             </div>

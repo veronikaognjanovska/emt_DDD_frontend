@@ -1,7 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import UserService from "../../../Service/UserService";
 
 const BookComponent = (props) => {
+
+    let username = UserService.getLoggedInUser();
+
     return (
         <tr>
             <td>{props.term.id.id}</td>
@@ -15,15 +19,21 @@ const BookComponent = (props) => {
                       to={`/books/view/${props.term.id.id}`}>
                     View
                 </Link>
-                <Link className={"btn btn-outline-info ml-2 edit-btn"}
-                      onClick={() => props.onEdit(props.term.id.id)}
-                      to={`/books/edit/${props.term.id.id}`}>
-                    Edit
-                </Link>
-                <a title={"Delete"} className={"btn btn-outline-danger ml-2"}
-                   onClick={() => props.onDeleteBook(props.term.id.id)}>
-                    Delete
-                </a>
+                {
+                    username !== undefined &&
+                    <Link className={"btn btn-outline-info ml-2 edit-btn"}
+                          onClick={() => props.onEdit(props.term.id.id)}
+                          to={`/books/edit/${props.term.id.id}`}>
+                        Edit
+                    </Link>
+                }
+                {
+                    username !== undefined &&
+                    <a title={"Delete"} className={"btn btn-outline-danger ml-2"}
+                       onClick={() => props.onDeleteBook(props.term.id.id)}>
+                        Delete
+                    </a>
+                }
             </td>
         </tr>
     )
