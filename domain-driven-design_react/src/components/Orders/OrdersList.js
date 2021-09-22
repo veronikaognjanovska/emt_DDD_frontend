@@ -35,6 +35,7 @@ class OrdersList extends React.Component {
                                     <th scope={"col"}>Ordered On Date</th>
                                     <th scope={"col"}>OrderState</th>
                                     <th scope={"col"}>Currency</th>
+                                    <th scope={"col"}>Address</th>
                                     <th scope={"col"}></th>
                                 </tr>
                                 </thead>

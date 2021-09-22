@@ -17,8 +17,11 @@ const OrderService = {
         return axios.get(`${OrderURL}/${UserService.getLoggedInUser()}/items`);
     },
 
-    makeOrder: (id) => {
-        return axios.get(`${OrderURL}/${UserService.getLoggedInUser()}/makeorder`);
+    makeOrder: (address) => {
+        console.log("asdasdad")
+        return axios.put(`${OrderURL}/${UserService.getLoggedInUser()}/makeorder`, {
+            'address': address
+        });
     },
 
     addToShoppingCartBook: (book) => {

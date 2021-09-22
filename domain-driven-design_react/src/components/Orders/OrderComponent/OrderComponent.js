@@ -8,6 +8,7 @@ const OrderComponent = (props) => {
             <td>{props.term.orderedOnDate}</td>
             <td>{props.term.orderState}</td>
             <td>{props.term.currency}</td>
+            <td>{props.term.address}</td>
             <td className={"text-right actions"}>
                 <Link className={"btn btn-outline-warning ml-2 view-btn"}
                       onClick={() => props.onView(props.term.id.id)}

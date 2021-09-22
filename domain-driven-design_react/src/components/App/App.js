@@ -231,9 +231,9 @@ class App extends Component {
             });
     }
 
-    onOrder = () => {
-        window.location.pathname = "/books";
-        OrderService.makeOrder()
+    onOrder = (address) => {
+        // window.location.pathname = "/books";
+        OrderService.makeOrder(address)
             .then(() => {
                 this.loadOrders();
                 this.loadItems();

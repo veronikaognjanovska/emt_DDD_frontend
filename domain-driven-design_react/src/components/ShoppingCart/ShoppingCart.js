@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate'
 import './ShoppingCart.css';
 import {Link} from "react-router-dom";
 import ShoppingCartItemComponent from "./ShoppingCartItemComponent/ShoppingCartItemComponent";
+import Modal from "../Modals/Modal";
 
 class ShoppingCart extends React.Component {
 
@@ -10,14 +11,20 @@ class ShoppingCart extends React.Component {
         super(props);
         this.state = {
             page: 0,
-            size: 2
+            size: 2,
+            data: {
+                label: 'Address',
+                title: 'Make Order',
+                type: 'text'
+            },
+            show: false,
+            showModal: false,
         }
-        console.log(props)
     }
 
     calculateTotal = () => {
-        if (this.props.items.orderItemList.length > 0) {
-            return this.props.items.orderItemList.map(i => i.orderItemPrice.amount).reduce((prev, next) => prev + next);
+        if (this.props.items?.orderItemList?.length > 0) {
+            return this.props.items?.orderItemList?.map(i => i.orderItemPrice.amount).reduce((prev, next) => prev + next);
         }
         return 0;
     }
@@ -25,15 +32,14 @@ class ShoppingCart extends React.Component {
     render() {
         const offset = this.state.size * this.state.page;
         const nextPageOffset = offset + this.state.size;
-        const pageCount = Math.ceil(this.props.items.orderItemList.length / this.state.size);
+        const pageCount = Math.ceil(this.props.items?.orderItemList?.length / this.state.size);
         const ShoppingCartList = this.getShoppingCartPage(offset, nextPageOffset);
 
         return (
             <div className={"row books"}>
                 <div className={"button-right"}>
                     <Link className={"btn btn-outline-warning ml-2 view-btn"}
-                          onClick={() => this.props.onOrderAll()}
-                          to={`/orders`}>
+                          onClick={() => this.makeOrder()}>
                         Make Order
                     </Link>
                 </div>
@@ -100,6 +106,14 @@ class ShoppingCart extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className={'row m-2'} style={{backgroundColor: 'blue'}}>
+                    <div className={'col-sm-3 d-flex justify-content-center'}>
+                        <Modal show={this.state.showModal} handleClose={this.hideModal}
+                                       data={this.state.data} onSubmit={this.onMakeOrder}>
+                        </Modal>
+                    </div>
+
+                </div>
             </div>
         )
     }
@@ -113,7 +127,7 @@ class ShoppingCart extends React.Component {
     }
 
     getShoppingCartPage = (offset, nextPageOffset) => {
-        return this.props.items.orderItemList?.map((term, index) => {
+        return this.props.items?.orderItemList?.map((term, index) => {
             return (
                 <ShoppingCartItemComponent key={index} term={term} onRemoveItem={this.props.onRemoveItem}/>
             );
@@ -122,6 +136,21 @@ class ShoppingCart extends React.Component {
         })
     }
 
+    showModal = () => {
+        this.setState({show: true});
+    }
+
+    hideModal = () => {
+        this.setState({show: false, showModal: false});
+    }
+
+    makeOrder = () => {
+        this.setState({showModal: true});
+    }
+
+    onMakeOrder = (address) => {
+        this.props.onOrderAll(address);
+    }
 }
 
 export default ShoppingCart;
